@@ -1,5 +1,7 @@
 package com.hmends.demoMVC.domain;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,6 +15,9 @@ public class Cargo extends AbstractEntity<Long> {
 	@ManyToOne
 	@JoinColumn(name="id_departamento_fk")
 	private Departamento departamento;
+	
+	@OneToMany(mappedBy = "cargo")
+	private List<Funcionario> funcionarios;
 
 	public Departamento getDepartamento() {
 		return departamento;
@@ -28,6 +33,14 @@ public class Cargo extends AbstractEntity<Long> {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public List<Funcionario> getFuncionarios() {
+		return funcionarios;
+	}
+
+	public void setFuncionarios(List<Funcionario> funcionarios) {
+		this.funcionarios = funcionarios;
 	}
 	
 	 
