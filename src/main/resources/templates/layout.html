@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:th="http://www.ultraq.net.nz/thymeleaf/layout">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
 	<title>Spring-Boot Básico</title>
@@ -27,14 +27,14 @@
 		<div>header</div>
 	</header>
 	
-	<div>
+	<div class="layout-main">	
 		<aside>
-			<nav>
+			<nav th:replace="fragments/sidebar :: nav-sidebar">
 				<span>menu</span>
 			</nav>
 		</aside>
 		
-		<section>
+		<section layout:fragment="corpo">
 			<div>conteudo principal das paginas</div>
 		</section>
 	</div>
