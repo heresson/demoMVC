@@ -1,5 +1,7 @@
 package com.hmends.demoMVC.service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,31 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	@Override
 	public List<Funcionario> buscarTodos() {
 		return dao.findAll();
+	}
+
+	@Override
+	public List<Funcionario> buscarPorNome(String nome) {
+		return dao.findByNome(nome);
+	}
+
+	@Override
+	public List<Funcionario> buscarPorCargo(Long id) {
+		return dao.findByCargo(id);
+	}
+
+	@Override
+	public List<Funcionario> buscarPorData(LocalDate entrada, LocalDate saida) {
+		if(entrada != null && saida != null) {
+			return dao.findByEntradaAndSaida(entrada, saida);
+		} else if (entrada != null) {        	
+	        return dao.findByDataEntrada(entrada);
+        } else if (saida != null) {        	
+	        return dao.findByDataSaida(saida);
+        } else {
+        	return new ArrayList<>();
+		
+        }		
+		
 	}
 
 }
