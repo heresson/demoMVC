@@ -1,32 +1,44 @@
 package com.hmends.demoMVC.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "ENDERECOS")
 public class Endereco extends AbstractEntity<Long> {
-	
+
+	@NotBlank
+	@Size(min = 3, max = 255)
 	@Column(nullable = false)
 	private String logradouro;
 	
+	@NotBlank
+	@Size(min = 3, max = 255)
 	@Column(nullable = false)
 	private String bairro;
 	
+	@NotBlank
+	@Size(min = 3, max = 255)
 	@Column(nullable = false)
 	private String cidade;
 	
+	@NotNull(message = "{NotNull.endereco.uf}")
 	@Column(nullable = false, length = 2)
 	@Enumerated(EnumType.STRING)
 	private UF uf;
-
-	@Column(nullable = false, length = 9)	
+	
+	@NotBlank
+	@Size(min = 9, max = 9, message = "{Size.endereco.cep}")
+	@Column(nullable = false, length = 9)
 	private String cep;
 	
+	@NotNull(message = "{NotNull.endereco.numero}")
+	@Digits(integer = 5, fraction = 0)
 	@Column(nullable = false, length = 5)
 	private Integer numero;
 	
-	//nao preciso informar o column por nao ter restricoes
+	@Size(max = 255)
 	private String complemento;
 
 	public String getLogradouro() {
@@ -84,8 +96,4 @@ public class Endereco extends AbstractEntity<Long> {
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
-	
-	
-	
-
 }
